@@ -1,0 +1,15 @@
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\bin\Debug\net6.0\Curso C# Clase 1.exe
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\bin\Debug\net6.0\Curso C# Clase 1.deps.json
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\bin\Debug\net6.0\Curso C# Clase 1.runtimeconfig.json
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\bin\Debug\net6.0\Curso C# Clase 1.dll
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\bin\Debug\net6.0\Curso C# Clase 1.pdb
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\obj\Debug\net6.0\Curso C# Clase 1.csproj.AssemblyReference.cache
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\obj\Debug\net6.0\Curso C# Clase 1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\obj\Debug\net6.0\Curso C# Clase 1.AssemblyInfoInputs.cache
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\obj\Debug\net6.0\Curso C# Clase 1.AssemblyInfo.cs
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\obj\Debug\net6.0\Curso C# Clase 1.csproj.CoreCompileInputs.cache
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\obj\Debug\net6.0\Curso C# Clase 1.dll
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\obj\Debug\net6.0\refint\Curso C# Clase 1.dll
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\obj\Debug\net6.0\Curso C# Clase 1.pdb
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\obj\Debug\net6.0\Curso C# Clase 1.genruntimeconfig.cache
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Curso C# Clase 1\obj\Debug\net6.0\ref\Curso C# Clase 1.dll
