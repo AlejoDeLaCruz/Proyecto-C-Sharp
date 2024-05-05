@@ -99,70 +99,132 @@
 
 //DESAFIO FUNCIONES: HACER QUE EL USUARIO SE LOGEE
 
-int precioCodigo(string codigo)
-{
-    int precio = 0;
 
-    switch (codigo)
+string contraseñaCreadaPorPrimeraVez;
+string usuarioCreadoPorPrimeraVez;
+
+string contraseñaDeLogeo;
+string usuarioDeLogeo;
+
+
+CreateAccount();
+LogIn(usuarioCreadoPorPrimeraVez, contraseñaCreadaPorPrimeraVez);
+
+void CreateAccount()
+{
+    Console.WriteLine("Cree su perfil, ingrese su nombre de usuario");
+    usuarioCreadoPorPrimeraVez = Console.ReadLine();
+
+
+    while (usuarioCreadoPorPrimeraVez == null || usuarioCreadoPorPrimeraVez == "")
     {
-        case "DES":
-            precio = 200;
-            break;
-        case "JP":
-            precio = 300;
-            break;
-        case "DET":
-            precio = 250;
-            break;
-        default:
-            precio = 0;
-            break;
+        Console.WriteLine("Intentelo de nuevo");
+        usuarioCreadoPorPrimeraVez = Console.ReadLine();
     }
 
-    return precio;
+    Console.WriteLine("Cree su perfil, ahora ingrese su contraseña");
+
+    contraseñaCreadaPorPrimeraVez = Console.ReadLine();
+
+    while (contraseñaCreadaPorPrimeraVez == null || contraseñaCreadaPorPrimeraVez == "")
+    {
+        Console.WriteLine("Intentelo de nuevo");
+        contraseñaCreadaPorPrimeraVez = Console.ReadLine();
+    }
+
+    Console.WriteLine("Cuenta creada exitosamente, ahora intente logearse");
 }
 
-void venta()
+void LogIn(string usuarioCreadoAnteriormente, string contraseñaCreadaAnteriormente)
 {
-    string codigo = "";
-    int cantProductos;
-    int montoAPagar = 0;
-    string confirmacion = "-";
+    Console.WriteLine("Ingrese su nombre de usuario creado anteriormente");
 
-    Console.WriteLine("Bienvenido, estos son nuestros productos.");
-    Console.WriteLine("Código        Descripción        Precio\r\nDES          Desodorante        200\r\nJP           Jabón en Polvo        300\r\nDET         Detergente       250");
+    usuarioDeLogeo = Console.ReadLine();
 
-
-
-    while (codigo != "FIN")
+    while (usuarioDeLogeo == null || usuarioDeLogeo == "" || !usuarioDeLogeo.Equals(usuarioCreadoAnteriormente))
     {
-        Console.WriteLine("Ingrese el codigo que desea comprar");
-        codigo = Console.ReadLine().ToUpper();
-
-        if (codigo == "FIN")
-        {
-            break;
-        }
-        int precio = precioCodigo(codigo);
-
-        Console.WriteLine("Ingrese la cantidad que desea comprar");
-        cantProductos = int.Parse(Console.ReadLine());
-
-        montoAPagar += cantProductos * precio;
-
+        Console.WriteLine("Usuario incorrecto, intentelo de nuevo");
+        usuarioDeLogeo = Console.ReadLine();
     }
-    //TODO el final de la compra
-    Console.WriteLine("Su monto a pagar es {0}", montoAPagar);
-    Console.WriteLine("Desea realizar la compra? Si/No");
-    confirmacion = Console.ReadLine().ToUpper();
 
-    if (confirmacion == "SI")
+    Console.WriteLine("Ingrese su contraseña creada anteriormente");
+
+    contraseñaDeLogeo = Console.ReadLine();
+
+    while (contraseñaDeLogeo == null || contraseñaDeLogeo == "" || !contraseñaDeLogeo.Equals(contraseñaCreadaAnteriormente))
     {
-        Console.WriteLine("Gracias por la compra!!");
+        Console.WriteLine("Usuario incorrecto, intentelo de nuevo");
+        contraseñaDeLogeo = Console.ReadLine();
     }
+
+    Console.WriteLine("Ha ingresado exitosamente");
 }
 
-venta();
 
 
- 
+//int precioCodigo(string codigo)
+//{
+//    int precio = 0;
+
+//    switch (codigo)
+//    {
+//        case "DES":
+//            precio = 200;
+//            break;
+//        case "JP":
+//            precio = 300;
+//            break;
+//        case "DET":
+//            precio = 250;
+//            break;
+//        default:
+//            precio = 0;
+//            break;
+//    }
+
+//    return precio;
+//}
+
+//void venta()
+//{
+//    string codigo = "";
+//    int cantProductos;
+//    int montoAPagar = 0;
+//    string confirmacion = "-";
+
+//    Console.WriteLine("Bienvenido, estos son nuestros productos.");
+//    Console.WriteLine("Código        Descripción        Precio\r\nDES          Desodorante        200\r\nJP           Jabón en Polvo        300\r\nDET         Detergente       250");
+
+
+
+//    while (codigo != "FIN")
+//    {
+//        Console.WriteLine("Ingrese el codigo que desea comprar");
+//        codigo = Console.ReadLine().ToUpper();
+
+//        if (codigo == "FIN")
+//        {
+//            break;
+//        }
+//        int precio = precioCodigo(codigo);
+
+//        Console.WriteLine("Ingrese la cantidad que desea comprar");
+//        cantProductos = int.Parse(Console.ReadLine());
+
+//        montoAPagar += cantProductos * precio;
+
+//    }
+//    //TODO el final de la compra
+//    Console.WriteLine("Su monto a pagar es {0}", montoAPagar);
+//    Console.WriteLine("Desea realizar la compra? Si/No");
+//    confirmacion = Console.ReadLine().ToUpper();
+
+//    if (confirmacion == "SI")
+//    {
+//        Console.WriteLine("Gracias por la compra!!");
+//    }
+//}
+
+//venta();
+
+
