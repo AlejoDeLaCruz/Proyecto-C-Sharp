@@ -8,15 +8,22 @@ namespace PrimerDesafio
 {
     internal class Venta
     {
-        protected int Id { get; set; }
-        protected string Comentarios { get; set; }
-        protected string Usuario { get; set; }
+
+        private int _id;
+        private string _comentarios;
+        private string _usuario;
+
+        //POSIBLES GETTERS Y SETTERS:
+
+        //protected int Id { get; set; }
+        //protected string Comentarios { get; set; }
+        //protected string Usuario { get; set; }
 
         public Venta(int id, string comentarios, string usuario)
         {
-            this.Id = id;
-            this.Comentarios = comentarios;
-            this.Usuario = usuario;
+            this._id = id;
+            this._comentarios = comentarios;
+            this._usuario = usuario;
         }
     }
 }
