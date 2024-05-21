@@ -30,11 +30,14 @@
         {
             label1 = new Label();
             label2 = new Label();
-            button1 = new Button();
-            usuario = new TextBox();
-            contraseña = new TextBox();
+            GuardarUsuarioYContraseña = new Button();
+            usuarioTextBox = new TextBox();
+            contraseñaTextBox = new TextBox();
             label3 = new Label();
             label4 = new Label();
+            label5 = new Label();
+            label6 = new Label();
+            verUsuarioYContraseña = new Button();
             SuspendLayout();
             // 
             // label1
@@ -48,7 +51,6 @@
             label1.TabIndex = 0;
             label1.Text = "¡Bienvenido!";
             label1.TextAlign = ContentAlignment.TopCenter;
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -62,34 +64,34 @@
             label2.Text = "Registrate para ingresar";
             label2.TextAlign = ContentAlignment.TopCenter;
             // 
-            // button1
+            // GuardarUsuarioYContraseña
             // 
-            button1.BackColor = SystemColors.ActiveBorder;
-            button1.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.ForeColor = SystemColors.ActiveCaptionText;
-            button1.Location = new Point(671, 382);
-            button1.Name = "button1";
-            button1.Size = new Size(100, 45);
-            button1.TabIndex = 2;
-            button1.Text = "Aceptar";
-            button1.UseVisualStyleBackColor = false;
+            GuardarUsuarioYContraseña.BackColor = SystemColors.ActiveBorder;
+            GuardarUsuarioYContraseña.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            GuardarUsuarioYContraseña.ForeColor = SystemColors.ActiveCaptionText;
+            GuardarUsuarioYContraseña.Location = new Point(671, 382);
+            GuardarUsuarioYContraseña.Name = "GuardarUsuarioYContraseña";
+            GuardarUsuarioYContraseña.Size = new Size(100, 45);
+            GuardarUsuarioYContraseña.TabIndex = 2;
+            GuardarUsuarioYContraseña.Text = "Aceptar";
+            GuardarUsuarioYContraseña.UseVisualStyleBackColor = false;
+            GuardarUsuarioYContraseña.Click += GuardarUsuarioYContraseña_Click;
             // 
-            // usuario
+            // usuarioTextBox
             // 
-            usuario.BackColor = SystemColors.ControlLightLight;
-            usuario.ForeColor = SystemColors.ScrollBar;
-            usuario.Location = new Point(283, 209);
-            usuario.Name = "usuario";
-            usuario.Size = new Size(234, 26);
-            usuario.TabIndex = 3;
-            usuario.TextChanged += textBox1_TextChanged;
+            usuarioTextBox.BackColor = SystemColors.ControlLightLight;
+            usuarioTextBox.ForeColor = SystemColors.InactiveCaptionText;
+            usuarioTextBox.Location = new Point(283, 209);
+            usuarioTextBox.Name = "usuarioTextBox";
+            usuarioTextBox.Size = new Size(234, 26);
+            usuarioTextBox.TabIndex = 3;
             // 
-            // contraseña
+            // contraseñaTextBox
             // 
-            contraseña.Location = new Point(283, 296);
-            contraseña.Name = "contraseña";
-            contraseña.Size = new Size(234, 26);
-            contraseña.TabIndex = 4;
+            contraseñaTextBox.Location = new Point(283, 296);
+            contraseñaTextBox.Name = "contraseñaTextBox";
+            contraseñaTextBox.Size = new Size(234, 26);
+            contraseñaTextBox.TabIndex = 4;
             // 
             // label3
             // 
@@ -102,7 +104,6 @@
             label3.TabIndex = 5;
             label3.Text = "Contraseña";
             label3.TextAlign = ContentAlignment.TopCenter;
-            label3.Click += label3_Click;
             // 
             // label4
             // 
@@ -116,17 +117,55 @@
             label4.Text = "Usuario";
             label4.TextAlign = ContentAlignment.TopCenter;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.BackColor = SystemColors.ActiveCaptionText;
+            label5.ForeColor = SystemColors.ButtonHighlight;
+            label5.Location = new Point(283, 349);
+            label5.Name = "label5";
+            label5.Size = new Size(80, 20);
+            label5.TabIndex = 7;
+            label5.Text = "Tu usuario:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = SystemColors.ActiveCaptionText;
+            label6.ForeColor = SystemColors.ButtonHighlight;
+            label6.Location = new Point(283, 382);
+            label6.Name = "label6";
+            label6.Size = new Size(104, 20);
+            label6.TabIndex = 8;
+            label6.Text = "Tu contraseña:";
+            // 
+            // verUsuarioYContraseña
+            // 
+            verUsuarioYContraseña.BackColor = SystemColors.ButtonFace;
+            verUsuarioYContraseña.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            verUsuarioYContraseña.ForeColor = SystemColors.ActiveCaptionText;
+            verUsuarioYContraseña.Location = new Point(199, 358);
+            verUsuarioYContraseña.Name = "verUsuarioYContraseña";
+            verUsuarioYContraseña.Size = new Size(60, 30);
+            verUsuarioYContraseña.TabIndex = 9;
+            verUsuarioYContraseña.Text = "Ver";
+            verUsuarioYContraseña.UseVisualStyleBackColor = false;
+            verUsuarioYContraseña.Click += verUsuarioYContraseña_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
             ClientSize = new Size(800, 450);
+            Controls.Add(verUsuarioYContraseña);
+            Controls.Add(label6);
+            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(contraseña);
-            Controls.Add(usuario);
-            Controls.Add(button1);
+            Controls.Add(contraseñaTextBox);
+            Controls.Add(usuarioTextBox);
+            Controls.Add(GuardarUsuarioYContraseña);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "Form1";
@@ -140,10 +179,13 @@
 
         private Label label1;
         private Label label2;
-        private Button button1;
-        private TextBox usuario;
-        private TextBox contraseña;
+        private Button GuardarUsuarioYContraseña;
+        private TextBox usuarioTextBox;
+        private TextBox contraseñaTextBox;
         private Label label3;
         private Label label4;
+        private Label label5;
+        private Label label6;
+        private Button verUsuarioYContraseña;
     }
 }
