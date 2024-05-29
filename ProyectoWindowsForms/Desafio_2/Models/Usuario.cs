@@ -16,12 +16,12 @@ namespace Desafio_2.Models
         public string Mail { get; set; }
         public Usuario(int id, string nombre, string apellido, string nombreUsuario, string contraseña, string mail)
         {
-            this.Id = id;
-            this.Nombre = nombre;
-            this.Apellido = apellido;
-            this.NombreUsuario = nombreUsuario;
-            this.Contraseña = contraseña;
-            this.Mail = mail;
+            Id = id;
+            Nombre = nombre;
+            Apellido = apellido;
+            NombreUsuario = nombreUsuario;
+            Contraseña = contraseña;
+            Mail = mail;
         }
 
     }
