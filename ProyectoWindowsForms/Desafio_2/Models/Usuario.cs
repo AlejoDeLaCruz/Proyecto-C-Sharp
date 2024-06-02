@@ -14,6 +14,7 @@ namespace Desafio_2.Models
         public string NombreUsuario { get; set; }
         public string Contraseña { get; set; }
         public string Mail { get; set; }
+        public Usuario() { }
         public Usuario(int id, string nombre, string apellido, string nombreUsuario, string contraseña, string mail)
         {
             Id = id;

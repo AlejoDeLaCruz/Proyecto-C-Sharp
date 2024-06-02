@@ -8,15 +8,16 @@ namespace Desafio_2.Models
 {
     internal class Venta
     {
-        protected int Id { get; set; }
-        protected string Comentarios { get; set; }
-        protected string Usuario { get; set; }
+        public int Id { get; set; }
+        public string Comentarios { get; set; }
+        public int IdUsuario { get; set; }
 
-        public Venta(int id, string comentarios, string usuario)
+        public Venta() { }
+        public Venta(int id, string comentarios, int idUsuario)
         {
             this.Id = id;
             this.Comentarios = comentarios;
-            this.Usuario = usuario;
+            this.IdUsuario = idUsuario;
         }
     }
 }
