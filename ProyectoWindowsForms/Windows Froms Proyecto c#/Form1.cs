@@ -36,5 +36,10 @@ namespace Windows_Froms_Proyecto_c_
 
             MessageBox.Show("Usuario y contraseña guardados con éxito");
         }
+
+        private void usuarioTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

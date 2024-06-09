@@ -1,0 +1,15 @@
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\bin\Debug\net6.0\SistemaGestionData.deps.json
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\bin\Debug\net6.0\SistemaGestionData.dll
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\bin\Debug\net6.0\SistemaGestionData.pdb
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\bin\Debug\net6.0\SistemaGestionEntities.dll
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\bin\Debug\net6.0\SistemaGestionEntities.pdb
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\obj\Debug\net6.0\SistemaGestionData.csproj.AssemblyReference.cache
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\obj\Debug\net6.0\SistemaGestionData.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\obj\Debug\net6.0\SistemaGestionData.AssemblyInfoInputs.cache
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\obj\Debug\net6.0\SistemaGestionData.AssemblyInfo.cs
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\obj\Debug\net6.0\SistemaGestionData.csproj.CoreCompileInputs.cache
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\obj\Debug\net6.0\SistemaGestionData.csproj.CopyComplete
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\obj\Debug\net6.0\SistemaGestionData.dll
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\obj\Debug\net6.0\refint\SistemaGestionData.dll
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\obj\Debug\net6.0\SistemaGestionData.pdb
+C:\Users\Agustin\Documents\C# Coder\Proyecto-C-\Master\SistemaGestionData\obj\Debug\net6.0\ref\SistemaGestionData.dll

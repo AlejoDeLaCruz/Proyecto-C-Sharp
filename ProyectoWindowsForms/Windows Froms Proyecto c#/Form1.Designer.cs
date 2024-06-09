@@ -85,6 +85,7 @@
             usuarioTextBox.Name = "usuarioTextBox";
             usuarioTextBox.Size = new Size(234, 26);
             usuarioTextBox.TabIndex = 3;
+            usuarioTextBox.TextChanged += usuarioTextBox_TextChanged;
             // 
             // contraseñaTextBox
             // 
