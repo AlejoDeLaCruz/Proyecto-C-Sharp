@@ -87,7 +87,7 @@ namespace SistemaGestionData
         }
 
         //METODO CREAR PRODUCTO VENDIDO
-        public static void CrearProductoVendido(ProductoVendido productoVendido)
+        public void CrearProductoVendido(ProductoVendido productoVendido)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -102,20 +102,20 @@ namespace SistemaGestionData
                     comando.Parameters.Add(new SqlParameter("IdProducto", SqlDbType.Int) { Value = productoVendido.IdProducto });
                     comando.Parameters.Add(new SqlParameter("Stock", SqlDbType.Int) { Value = productoVendido.Stock });
                     comando.Parameters.Add(new SqlParameter("IdVenta", SqlDbType.Int) { Value = productoVendido.IdVenta });
+                    comando.ExecuteNonQuery();  
                 }
-                conexion.Close();
             }
         }
 
         //METODO MODIFICAR PRODUCTO VENDIDO
-        public static void ModificarProductoVendido(ProductoVendido productoVendido)
+        public void ModificarProductoVendido(ProductoVendido productoVendido)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
-            var query = "UPDATE ProductoVendido" +
-                        "SET IdProducto = @IdProducto" +
-                        ", Stock = @Stock" +
-                        ", IdVenta = @IdVenta" +
+            var query = "UPDATE ProductoVendido " +
+                        "SET IdProducto = @IdProducto, " +
+                        "Stock = @Stock, " +
+                        "IdVenta = @IdVenta " +
                         "WHERE Id = @Id";
 
             using (SqlConnection conexion = new SqlConnection(connectionString))
@@ -127,13 +127,13 @@ namespace SistemaGestionData
                     comando.Parameters.Add(new SqlParameter("IdProducto", SqlDbType.Int) { Value = productoVendido.IdProducto });
                     comando.Parameters.Add(new SqlParameter("Stock", SqlDbType.Int) { Value = productoVendido.Stock });
                     comando.Parameters.Add(new SqlParameter("IdVenta", SqlDbType.Int) { Value = productoVendido.IdVenta });
+                    comando.ExecuteNonQuery();
                 }
-                conexion.Close();
             }
         }
 
         //METODO ELIMINAR PRODUCTO VENDIDO
-        public static void EliminarProductoVendido(ProductoVendido productoVendido)
+        public void EliminarProductoVendido(ProductoVendido productoVendido)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -145,8 +145,8 @@ namespace SistemaGestionData
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
                     comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = productoVendido.Id });
+                    comando.ExecuteNonQuery();
                 }
-                conexion.Close();
             }
         }
     }

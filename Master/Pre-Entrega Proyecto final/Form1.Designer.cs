@@ -48,7 +48,7 @@
             button1.Name = "button1";
             button1.Size = new Size(187, 40);
             button1.TabIndex = 0;
-            button1.Text = "Ingresar";
+            button1.Text = "Crear";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -64,39 +64,39 @@
             label1.Text = "Nombre";
             label1.Click += label1_Click;
             // 
-            // textBox1
+            // nombrePersona
             // 
             nombrePersona.Location = new Point(300, 154);
-            nombrePersona.Name = "textBox1";
+            nombrePersona.Name = "nombrePersona";
             nombrePersona.Size = new Size(114, 26);
             nombrePersona.TabIndex = 2;
             nombrePersona.TextChanged += textBox1_TextChanged;
             // 
-            // textBox2
+            // apellidoPersona
             // 
             apellidoPersona.Location = new Point(300, 257);
-            apellidoPersona.Name = "textBox2";
+            apellidoPersona.Name = "apellidoPersona";
             apellidoPersona.Size = new Size(114, 26);
             apellidoPersona.TabIndex = 3;
             // 
-            // textBox3
+            // nombreUsuarioPersona
             // 
             nombreUsuarioPersona.Location = new Point(300, 207);
-            nombreUsuarioPersona.Name = "textBox3";
+            nombreUsuarioPersona.Name = "nombreUsuarioPersona";
             nombreUsuarioPersona.Size = new Size(114, 26);
             nombreUsuarioPersona.TabIndex = 4;
             // 
-            // textBox4
+            // emailPersona
             // 
             emailPersona.Location = new Point(579, 207);
-            emailPersona.Name = "textBox4";
+            emailPersona.Name = "emailPersona";
             emailPersona.Size = new Size(114, 26);
             emailPersona.TabIndex = 5;
             // 
-            // textBox5
+            // contraseniaPersona
             // 
             contraseniaPersona.Location = new Point(579, 154);
-            contraseniaPersona.Name = "textBox5";
+            contraseniaPersona.Name = "contraseniaPersona";
             contraseniaPersona.Size = new Size(114, 26);
             contraseniaPersona.TabIndex = 6;
             // 

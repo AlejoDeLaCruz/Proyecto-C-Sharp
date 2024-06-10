@@ -85,7 +85,7 @@ namespace SistemaGestionData
         }
 
         //METODO CREAR VENTA
-        public static void CrearVenta(Venta venta)
+        public void CrearVenta(Venta venta)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -99,19 +99,19 @@ namespace SistemaGestionData
                 {
                     comando.Parameters.Add(new SqlParameter("Comentarios", SqlDbType.VarChar) { Value = venta.Comentarios });
                     comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = venta.IdUsuario });
+                    comando.ExecuteNonQuery();
                 }
-                conexion.Close();
             }
         }
 
         //METODO MODIFICAR VENTA
-        public static void ModificarVenta(Venta venta)
+        public void ModificarVenta(Venta venta)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
-            var query = "UPDATE Venta" +
-                        "SET Comentarios = @Comentarios" +
-                        ", IdUsuario = @IdUsuario" +
+            var query = "UPDATE Venta " +
+                        "SET Comentarios = @Comentarios, " +
+                        "IdUsuario = @IdUsuario " +
                         "WHERE Id = @Id";
 
             using (SqlConnection conexion = new SqlConnection(connectionString))
@@ -122,14 +122,16 @@ namespace SistemaGestionData
                     comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = venta.Id });
                     comando.Parameters.Add(new SqlParameter("Comentarios", SqlDbType.VarChar) { Value = venta.Comentarios });
                     comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = venta.IdUsuario });
+
+                    comando.ExecuteNonQuery();
                 }
-                conexion.Close();
             }
         }
 
+
         //METODO ELIMINAR VENTA
 
-        public static void EliminarVenta(Venta venta)
+        public void EliminarVenta(Venta venta)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -141,8 +143,8 @@ namespace SistemaGestionData
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
                     comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = venta.Id });
+                    comando.ExecuteNonQuery();
                 }
-                conexion.Close();
             }
         }
     }

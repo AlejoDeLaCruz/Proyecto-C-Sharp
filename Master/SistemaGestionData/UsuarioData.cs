@@ -115,16 +115,16 @@ namespace SistemaGestionData
 
 
         //METODO MODIFICAR USUARIO
-        public static void ModificarUsuario(Usuario usuario)
+        public void ModificarUsuario(Usuario usuario)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
-            var query = "UPDATE Usuario" +
-                        "SET Nombre = @Nombre" +
-                        ", Apellido = @Apellido" +
-                        ", NombreUsuario = @NombreUsuario" +
-                        ", Contraseña = @Contraseña" +
-                        ", Mail = @Mail" +
+            var query = "UPDATE Usuario " +
+                        "SET Nombre = @Nombre, " +
+                        "Apellido = @Apellido, " +
+                        "NombreUsuario = @NombreUsuario, " +
+                        "Contraseña = @Contraseña, " +
+                        "Mail = @Mail " +
                         "WHERE Id = @Id";
 
             using (SqlConnection conexion = new SqlConnection(connectionString))
@@ -138,13 +138,14 @@ namespace SistemaGestionData
                     comando.Parameters.Add(new SqlParameter("NombreUsuario", SqlDbType.VarChar) { Value = usuario.NombreUsuario });
                     comando.Parameters.Add(new SqlParameter("Contraseña", SqlDbType.VarChar) { Value = usuario.Contraseña });
                     comando.Parameters.Add(new SqlParameter("Mail", SqlDbType.VarChar) { Value = usuario.Mail });
+
+                    comando.ExecuteNonQuery();
                 }
-                conexion.Close();
             }
         }
 
         //METODO ELIMINAR USUARIO
-        public static void EliminarUsuario(Usuario usuario)
+        public void EliminarUsuario(Usuario usuario)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -156,8 +157,8 @@ namespace SistemaGestionData
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
                     comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = usuario.Id });
+                    comando.ExecuteNonQuery();
                 }
-                conexion.Close();
             }
         }
     }

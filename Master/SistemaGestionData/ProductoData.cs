@@ -92,12 +92,12 @@ namespace SistemaGestionData
 
 
         //METODO CREAR PRODUCTO
-        public static void CrearProducto(Producto producto)
+        public void CrearProducto(Producto producto)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
-            var query = "INSERT INTO Producto (Descripcion, PrecioVenta, Costo, Stock, IdUsuario)" +
-                        "VALUES (@Descripcion, @PrecioVenta, @Costo, @Stock, @IdUsuario)";
+            var query = "INSERT INTO Producto (Descripciones, PrecioVenta, Costo, Stock, IdUsuario)" +
+                        "VALUES (@Descripciones, @PrecioVenta, @Costo, @Stock, @IdUsuario)";
 
             using (SqlConnection conexion = new SqlConnection(connectionString))
             {
@@ -109,22 +109,22 @@ namespace SistemaGestionData
                     comando.Parameters.Add(new SqlParameter("Costo", SqlDbType.Money) { Value = producto.Costo });
                     comando.Parameters.Add(new SqlParameter("Stock", SqlDbType.Int) { Value = producto.Stock });
                     comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = producto.IdUsuario });
+                    comando.ExecuteNonQuery();
                 }
-                conexion.Close();
             }
         }
 
         //METODO MODIFICAR PRODUCTO
-        public static void ModificarProducto(Producto producto)
+        public void ModificarProducto(Producto producto)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
-            var query = "UPDATE Producto" +
-                        "SET Descripcion = @Descripcion" +
-                        ", PrecioVenta = @PrecioVenta" +
-                        ", Costo = @Costo" +
-                        ", Stock = @Stock" +
-                        ", Usuario = @IdUsuario" +
+            var query = "UPDATE Producto " +
+                        "SET Descripciones = @Descripciones, " +
+                        "PrecioVenta = @PrecioVenta, " +
+                        "Costo = @Costo, " +
+                        "Stock = @Stock, " +
+                        "IdUsuario = @IdUsuario " +
                         "WHERE Id = @Id";
 
             using (SqlConnection conexion = new SqlConnection(connectionString))
@@ -138,14 +138,14 @@ namespace SistemaGestionData
                     comando.Parameters.Add(new SqlParameter("Costo", SqlDbType.Money) { Value = producto.Costo });
                     comando.Parameters.Add(new SqlParameter("Stock", SqlDbType.Int) { Value = producto.Stock });
                     comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = producto.IdUsuario });
+                    comando.ExecuteNonQuery();
                 }
-                conexion.Close();
             }
         }
 
         //METODO ELIMINAR PRODUCTO
 
-        public static void EliminarProducto(Producto producto)
+        public void EliminarProducto(Producto producto)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -157,8 +157,8 @@ namespace SistemaGestionData
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
                     comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = producto.Id });
+                    comando.ExecuteNonQuery();
                 }
-                conexion.Close();
             }
         }
     }
