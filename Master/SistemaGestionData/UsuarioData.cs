@@ -91,7 +91,7 @@ namespace SistemaGestionData
         }
 
         //METODO CREAR USUARIO
-        public void CrearUsuario(Usuario usuario)
+        public static bool CrearUsuario(Usuario usuario)
         {
                 string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -108,14 +108,14 @@ namespace SistemaGestionData
                         comando.Parameters.Add(new SqlParameter("NombreUsuario", SqlDbType.VarChar) { Value = usuario.NombreUsuario });
                         comando.Parameters.Add(new SqlParameter("Contraseña", SqlDbType.VarChar) { Value = usuario.Contraseña });
                         comando.Parameters.Add(new SqlParameter("Mail", SqlDbType.VarChar) { Value = usuario.Mail });
-                        comando.ExecuteNonQuery(); 
+                        return comando.ExecuteNonQuery() > 0; 
                     }
                 }
         }
 
 
         //METODO MODIFICAR USUARIO
-        public void ModificarUsuario(Usuario usuario)
+        public static bool ModificarUsuario(Usuario usuario)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -139,13 +139,13 @@ namespace SistemaGestionData
                     comando.Parameters.Add(new SqlParameter("Contraseña", SqlDbType.VarChar) { Value = usuario.Contraseña });
                     comando.Parameters.Add(new SqlParameter("Mail", SqlDbType.VarChar) { Value = usuario.Mail });
 
-                    comando.ExecuteNonQuery();
+                    return comando.ExecuteNonQuery() > 0;
                 }
             }
         }
 
         //METODO ELIMINAR USUARIO
-        public void EliminarUsuario(Usuario usuario)
+        public static bool EliminarUsuario(int id)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -156,8 +156,27 @@ namespace SistemaGestionData
                 conexion.Open();
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
-                    comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = usuario.Id });
-                    comando.ExecuteNonQuery();
+                    comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = id });
+                    return comando.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        //VERIFICAR SI EL USUARIO EXISTE:
+
+        public static bool UsuarioExiste(int idUsuario)
+        {
+            string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
+
+            var query = "SELECT COUNT(1) FROM Usuario WHERE Id = @IdUsuario";
+
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                conexion.Open();
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                {
+                    comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = idUsuario });
+                    return (int)comando.ExecuteScalar() > 0;
                 }
             }
         }

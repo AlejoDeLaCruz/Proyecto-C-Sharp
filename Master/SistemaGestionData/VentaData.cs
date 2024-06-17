@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using SistemaGestionEntities;
+using System.Collections;
 
 namespace SistemaGestionData
 {
@@ -85,27 +86,73 @@ namespace SistemaGestionData
         }
 
         //METODO CREAR VENTA
-        public void CrearVenta(Venta venta)
+        public static bool CrearVenta(Venta venta, List<ProductoVendido> productos, int idUsuario)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
-            var query = "INSERT INTO Venta (Comentarios, IdUsuario)" +
-                        "VALUES (@Comentarios, @IdUsuario)";
+            var queryVenta = "INSERT INTO Venta (Comentarios, IdUsuario) " +
+                             "VALUES (@Comentarios, @IdUsuario); SELECT SCOPE_IDENTITY();";
+
+            var queryProductosVendidos = "INSERT INTO ProductoVendido (IdVenta, IdProducto, Stock) " +
+                                         "VALUES (@IdVenta, @IdProducto, @Stock);";
 
             using (SqlConnection conexion = new SqlConnection(connectionString))
             {
                 conexion.Open();
-                using (SqlCommand comando = new SqlCommand(query, conexion))
+
+                SqlTransaction transaction = conexion.BeginTransaction();
+
+                try
                 {
-                    comando.Parameters.Add(new SqlParameter("Comentarios", SqlDbType.VarChar) { Value = venta.Comentarios });
-                    comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = venta.IdUsuario });
-                    comando.ExecuteNonQuery();
+                    int idVenta;
+                    using (SqlCommand comandoVenta = new SqlCommand(queryVenta, conexion, transaction))
+                    {
+                        comandoVenta.Parameters.Add(new SqlParameter("Comentarios", SqlDbType.VarChar) { Value = venta.Comentarios });
+                        comandoVenta.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = idUsuario });
+                        idVenta = Convert.ToInt32(comandoVenta.ExecuteScalar());
+                    }
+
+                    foreach (var producto in productos)
+                    {
+                        using (SqlCommand comandoProductosVendidos = new SqlCommand(queryProductosVendidos, conexion, transaction))
+                        {
+                            comandoProductosVendidos.Parameters.Add(new SqlParameter("IdVenta", SqlDbType.Int) { Value = idVenta });
+                            comandoProductosVendidos.Parameters.Add(new SqlParameter("IdProducto", SqlDbType.Int) { Value = producto.IdProducto });
+                            comandoProductosVendidos.Parameters.Add(new SqlParameter("Stock", SqlDbType.Int) { Value = producto.Stock });
+
+                            comandoProductosVendidos.ExecuteNonQuery();
+                        }
+
+                        ActualizarStockProducto(conexion, transaction, producto.IdProducto, producto.Stock);
+                    }
+
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                    throw new Exception("Error al crear la venta. Detalles: " + ex.Message);
                 }
             }
         }
 
-        //METODO MODIFICAR VENTA
-        public void ModificarVenta(Venta venta)
+        //METODO ACTUALIZAR STOCK DE PRODUCTOS
+        public static bool ActualizarStockProducto(SqlConnection conexion, SqlTransaction transaction, int idProducto, int stock)
+        {
+            var queryActualizarStock = "UPDATE Producto SET Stock = Stock - @Stock WHERE Id = @IdProducto";
+
+            using (SqlCommand comandoActualizarStock = new SqlCommand(queryActualizarStock, conexion, transaction))
+            {
+                comandoActualizarStock.Parameters.Add(new SqlParameter("Stock", SqlDbType.Int) { Value = stock });
+                comandoActualizarStock.Parameters.Add(new SqlParameter("IdProducto", SqlDbType.Int) { Value = idProducto });
+
+                return comandoActualizarStock.ExecuteNonQuery() > 0;
+            }
+        }
+
+    //METODO MODIFICAR VENTA
+    public void ModificarVenta(Venta venta)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 

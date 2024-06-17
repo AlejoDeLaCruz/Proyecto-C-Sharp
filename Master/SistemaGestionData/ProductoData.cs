@@ -92,7 +92,7 @@ namespace SistemaGestionData
 
 
         //METODO CREAR PRODUCTO
-        public void CrearProducto(Producto producto)
+        public static bool CrearProducto(Producto producto)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -109,13 +109,13 @@ namespace SistemaGestionData
                     comando.Parameters.Add(new SqlParameter("Costo", SqlDbType.Money) { Value = producto.Costo });
                     comando.Parameters.Add(new SqlParameter("Stock", SqlDbType.Int) { Value = producto.Stock });
                     comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = producto.IdUsuario });
-                    comando.ExecuteNonQuery();
+                    return comando.ExecuteNonQuery() > 0;
                 }
             }
         }
 
         //METODO MODIFICAR PRODUCTO
-        public void ModificarProducto(Producto producto)
+        public static bool ModificarProducto(Producto producto)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -138,14 +138,14 @@ namespace SistemaGestionData
                     comando.Parameters.Add(new SqlParameter("Costo", SqlDbType.Money) { Value = producto.Costo });
                     comando.Parameters.Add(new SqlParameter("Stock", SqlDbType.Int) { Value = producto.Stock });
                     comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = producto.IdUsuario });
-                    comando.ExecuteNonQuery();
+                    return comando.ExecuteNonQuery() > 0;
                 }
             }
         }
 
         //METODO ELIMINAR PRODUCTO
 
-        public void EliminarProducto(Producto producto)
+        public static bool EliminarProducto(int id)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -156,8 +156,25 @@ namespace SistemaGestionData
                 conexion.Open();
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
-                    comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = producto.Id });
-                    comando.ExecuteNonQuery();
+                    comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = id });
+                    return comando.ExecuteNonQuery() > 0;
+                }
+            }
+        }
+
+        public static bool ProductoExiste(int idProducto)
+        {
+            string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
+
+            var query = "SELECT COUNT(1) FROM Producto WHERE Id = @IdProducto";
+
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                conexion.Open();
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                {
+                    comando.Parameters.Add(new SqlParameter("IdProducto", SqlDbType.Int) { Value = idProducto });
+                    return (int)comando.ExecuteScalar() > 0;
                 }
             }
         }

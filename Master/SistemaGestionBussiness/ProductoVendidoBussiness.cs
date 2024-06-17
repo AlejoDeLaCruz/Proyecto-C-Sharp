@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace SistemaGestionBussiness
 {
-    internal class ProductoVendidoBussiness
+    public class ProductoVendidoBussiness
     {
         public static List<ProductoVendido> GetProductosVendidos()
         {
-            return ProductoVendido.GetProductosVendidos();
+            return ProductoVendidoData.GetProductosVendidos();
         }
     }
 }
