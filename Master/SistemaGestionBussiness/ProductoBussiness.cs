@@ -20,6 +20,11 @@ namespace SistemaGestionBussiness
         }
         public static bool CrearProducto(Producto producto)
         {
+            if (producto.IdUsuario <= 0)
+            {
+                return false;
+            }
+
             return ProductoData.CrearProducto(producto);
         }
         public static bool EliminarProducto(int id)

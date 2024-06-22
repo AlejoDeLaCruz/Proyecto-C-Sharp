@@ -9,7 +9,6 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-
         [HttpGet("GetUsuarios", Name = "GetUsuarios")]
         public IEnumerable<Usuario> GetUsuarios()
         {
@@ -17,9 +16,21 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet("GetUsuariosPorId", Name = "GetUsuariosPorId")]
-        public IEnumerable<Usuario> GetUsuariosPorId(int id)
+        public ActionResult<IEnumerable<Usuario>> GetUsuariosPorId(int id)
         {
-            return UsuarioBussiness.GetUsuariosPorId(id);
+            if (id <= 0)
+            {
+                return BadRequest("Por favor introduzca un ID válido.");
+            }
+
+            var usuarios = UsuarioBussiness.GetUsuariosPorId(id);
+
+            if (usuarios == null || usuarios.Count == 0)
+            {
+                return NotFound("No se encontraron usuarios con el ID proporcionado.");
+            }
+
+            return Ok(usuarios);
         }
 
         [HttpPost("AddUsuario", Name = "AddUsuario")]
@@ -31,7 +42,7 @@ namespace WebApplication1.Controllers
                 return BadRequest("No se pudo crear el usuario. El IdUsuario no existe.");
             }
 
-            return Ok("usuario creado exitosamente");
+            return Ok("Usuario creado exitosamente");
         }
 
         [HttpPut("ModifyUsuario", Name = "ModifyUsuario")]
@@ -54,15 +65,18 @@ namespace WebApplication1.Controllers
         [HttpDelete("DeleteUsuario", Name = "DeleteUsuario")]
         public ActionResult<string> Delete([FromBody] int id)
         {
+            if (id <= 0)
+            {
+                return BadRequest("Por favor introduzca un ID válido.");
+            }
+
             bool status = UsuarioBussiness.EliminarUsuario(id);
             if (!status)
             {
                 return BadRequest("No se pudo eliminar el usuario");
             }
-            else
-            {
-                return "usuario eliminado exitosamente";
-            }
+
+            return Ok("Usuario eliminado exitosamente");
         }
     }
 }

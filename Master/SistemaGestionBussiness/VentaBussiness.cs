@@ -54,6 +54,11 @@ namespace SistemaGestionBussiness
 
         public static bool ModificarVenta(Venta venta)
         {
+            if (venta.IdUsuario <= 0 || !UsuarioData.UsuarioExiste(venta.IdUsuario))
+            {
+                throw new ArgumentException("El IdUsuario no es válido.");
+            }
+
             return VentaData.ModificarVenta(venta);
         }
     }

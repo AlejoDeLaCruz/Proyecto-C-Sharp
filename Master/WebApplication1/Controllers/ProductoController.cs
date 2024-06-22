@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SistemaGestionBussiness;
 using SistemaGestionEntities;
+using System.Collections.Generic;
 
 namespace WebApplication1.Controllers
 {
@@ -16,9 +17,21 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet("GetProductosPorId", Name = "GetProductosPorId")]
-        public IEnumerable<Producto> ObtenerProductoPorId(int id)
+        public ActionResult<IEnumerable<Producto>> ObtenerProductoPorId(int id)
         {
-            return ProductoBussiness.ObtenerProductoPorId(id);
+            if (id <= 0)
+            {
+                return BadRequest("Por favor introduzca un ID válido.");
+            }
+
+            var productos = ProductoBussiness.ObtenerProductoPorId(id);
+
+            if (productos == null || productos.Count == 0)
+            {
+                return NotFound("No se encontraron productos con el ID proporcionado.");
+            }
+
+            return Ok(productos);
         }
 
         [HttpPost("AddProducto", Name = "AddProducto")]
@@ -43,10 +56,10 @@ namespace WebApplication1.Controllers
             bool status = ProductoBussiness.ModificarProducto(producto);
             if (!status)
             {
-                return BadRequest("No se pudo crear el producto. El IdUsuario no existe.");
+                return BadRequest("No se pudo modificar el producto. El Id del producto no existe.");
             }
 
-            return Ok("Producto creado exitosamente");
+            return Ok("Producto modificado exitosamente");
         }
 
         [HttpDelete("DeleteProducto", Name = "DeleteProducto")]
@@ -59,7 +72,7 @@ namespace WebApplication1.Controllers
             }
             else
             {
-                return "producto eliminado exitosamente";
+                return Ok("Producto eliminado exitosamente");
             }
         }
     }

@@ -11,9 +11,6 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class VentaController : ControllerBase
     {
-
-        //HACER PUT DELETE GET BY ID
-
         [HttpGet("GetVentas", Name = "GetVentas")]
         public IEnumerable<Venta> Ventas()
         {
@@ -21,39 +18,21 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet("GetVentasPorId", Name = "GetVentasPorId")]
-        public IEnumerable<Venta> VentasPorId(int id)
+        public ActionResult<IEnumerable<Venta>> VentasPorId(int id)
         {
-            return VentaBussiness.GetVentasPorId(id);
-        }
-
-        [HttpDelete("DeleteVenta", Name = "DeleteVenta")]
-        public ActionResult<string> Delete([FromBody] int id)
-        {
-            bool status = VentaBussiness.DeleteVenta(id);
-
-            if (!status)
+            if (id <= 0)
             {
-                return BadRequest("No se pudo eliminar la venta");
+                return BadRequest("Por favor introduzca un ID válido.");
             }
-            else
-            {
-                return "Se pudo eliminar la venta exitosamente";
-            }
-        }
 
-        [HttpPut("ModificarVenta", Name = "ModificarVenta")]
-        public ActionResult<string> Put([FromBody] Venta venta)
-        {
-            bool status = VentaBussiness.ModificarVenta(venta);
+            var ventas = VentaBussiness.GetVentasPorId(id);
 
-            if (!status)
+            if (ventas == null || ventas.Count == 0)
             {
-                return BadRequest("No se pudo modificar la venta");
+                return NotFound("No se encontraron ventas con el ID proporcionado.");
             }
-            else
-            {
-                return "Se pudo modificar la venta exitosamente";
-            }
+
+            return Ok(ventas);
         }
 
         [HttpPost("CargarVenta", Name = "CargarVenta")]
@@ -101,6 +80,53 @@ namespace WebApplication1.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error interno del servidor: " + ex.Message);
             }
+        }
+
+        [HttpPut("ModificarVenta", Name = "ModificarVenta")]
+        public ActionResult<string> Put([FromBody] Venta venta)
+        {
+            try
+            {
+                if (venta.IdUsuario <= 0 || !UsuarioData.UsuarioExiste(venta.IdUsuario))
+                {
+                    return BadRequest("El IdUsuario no es válido.");
+                }
+
+                bool status = VentaBussiness.ModificarVenta(venta);
+
+                if (!status)
+                {
+                    return BadRequest("No se pudo modificar la venta. Agregar un Id válido");
+                }
+
+                return Ok("Venta modificada exitosamente.");
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error interno del servidor: " + ex.Message);
+            }
+        }
+
+        [HttpDelete("DeleteVenta", Name = "DeleteVenta")]
+        public ActionResult<string> Delete([FromBody] int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("Por favor introduzca un ID válido.");
+            }
+
+            bool status = VentaBussiness.DeleteVenta(id);
+
+            if (!status)
+            {
+                return BadRequest("No se pudo eliminar la venta");
+            }
+
+            return Ok("Se pudo eliminar la venta exitosamente");
         }
     }
 

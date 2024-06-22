@@ -18,7 +18,7 @@ namespace SistemaGestionData
 
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
-            var query = "SELECT * FROM Producto WHERE Id=@idProductoVendido";
+            var query = "SELECT * FROM ProductoVendido WHERE Id=@idProductoVendido";
 
             using (SqlConnection conexion = new SqlConnection(connectionString))
             {
