@@ -188,7 +188,6 @@ namespace SistemaGestionData
                 {
                     try
                     {
-                        // Primero eliminar los productos vendidos relacionados
                         var queryEliminarProductosVendidos = "DELETE FROM ProductoVendido WHERE IdVenta = @IdVenta";
                         using (SqlCommand comandoEliminarProductosVendidos = new SqlCommand(queryEliminarProductosVendidos, conexion, transaction))
                         {
@@ -196,15 +195,23 @@ namespace SistemaGestionData
                             comandoEliminarProductosVendidos.ExecuteNonQuery();
                         }
 
-                        // Luego eliminar la venta
                         var queryEliminarVenta = "DELETE FROM Venta WHERE Id = @Id";
                         using (SqlCommand comandoEliminarVenta = new SqlCommand(queryEliminarVenta, conexion, transaction))
                         {
                             comandoEliminarVenta.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = id });
-                            return comandoEliminarVenta.ExecuteNonQuery() > 0;
-                        }
+                            int rowsAffected = comandoEliminarVenta.ExecuteNonQuery();
 
-                        transaction.Commit();
+                            if (rowsAffected > 0)
+                            {
+                                transaction.Commit();
+                                return true;
+                            }
+                            else
+                            {
+                                transaction.Rollback();
+                                return false;
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {

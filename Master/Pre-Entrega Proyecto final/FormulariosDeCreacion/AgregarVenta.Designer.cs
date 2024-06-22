@@ -40,7 +40,7 @@
             productIdTxt = new TextBox();
             label4 = new Label();
             label5 = new Label();
-            AgregarProductoBtn = new Button(); // Agregar declaración del botón
+            AgregarProductoBtn = new Button();
             SuspendLayout();
             // 
             // IdDeUsuarioTxt
@@ -167,11 +167,11 @@
             // 
             AgregarProductoBtn.Location = new Point(680, 250);
             AgregarProductoBtn.Name = "AgregarProductoBtn";
-            AgregarProductoBtn.Size = new Size(75, 23);
+            AgregarProductoBtn.Size = new Size(75, 27);
             AgregarProductoBtn.TabIndex = 40;
             AgregarProductoBtn.Text = "Agregar Producto";
             AgregarProductoBtn.UseVisualStyleBackColor = true;
-            AgregarProductoBtn.Click += new System.EventHandler(this.AgregarProducto_Click);
+            AgregarProductoBtn.Click += AgregarProducto_Click;
             // 
             // AgregarVenta
             // 
@@ -179,7 +179,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlText;
             ClientSize = new Size(800, 450);
-            Controls.Add(AgregarProductoBtn); // Agregar el botón a los controles del formulario
+            Controls.Add(AgregarProductoBtn);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(productIdTxt);

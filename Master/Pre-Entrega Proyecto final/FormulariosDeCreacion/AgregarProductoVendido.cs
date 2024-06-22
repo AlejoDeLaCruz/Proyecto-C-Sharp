@@ -54,9 +54,8 @@ namespace Pre_Entrega_Proyecto_final.FormulariosDeCreacion
                 }
 
                 ProductoVendido nuevoProductoVendido = new ProductoVendido(0, idProducto, stock, idVenta);
-                ProductoVendidoData dataAccess = new ProductoVendidoData();
 
-                dataAccess.CrearProductoVendido(nuevoProductoVendido);
+                ProductoVendidoData.CrearProductoVendido(nuevoProductoVendido);
                 MessageBox.Show("Producto en venta creado con éxito");
 
 

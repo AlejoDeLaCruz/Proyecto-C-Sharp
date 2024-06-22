@@ -68,8 +68,7 @@ namespace Pre_Entrega_Proyecto_final
 
                 try
                 {
-                    ProductoVendidoData dataAccess = new ProductoVendidoData();
-                    dataAccess.ModificarProductoVendido(producto);
+                    ProductoVendidoData.ModificarProductoVendido(producto);
                     MessageBox.Show("Producto Vendido modificada con éxito");
                 }
                 catch (Exception ex)
@@ -100,8 +99,7 @@ namespace Pre_Entrega_Proyecto_final
 
                 try
                 {
-                    ProductoVendidoData dataAccess = new ProductoVendidoData();
-                    dataAccess.EliminarProductoVendido(producto);
+                    ProductoVendidoData.EliminarProductoVendido(producto.Id);
                     MessageBox.Show("Producto Vendido modificada con éxito");
                 }
                 catch (Exception ex)

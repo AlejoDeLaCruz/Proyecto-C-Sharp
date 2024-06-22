@@ -43,22 +43,17 @@ namespace Pre_Entrega_Proyecto_final
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                // Obtener la fila seleccionada
                 DataGridViewRow filaSeleccionada = dataGridView1.SelectedRows[0];
 
-                // Obtener los valores de las celdas en la fila seleccionada
                 int idVenta = Convert.ToInt32(filaSeleccionada.Cells["Id"].Value);
                 string comentarios = Convert.ToString(filaSeleccionada.Cells["Comentarios"].Value);
                 int idUsuario = Convert.ToInt32(filaSeleccionada.Cells["IdUsuario"].Value);
 
-                // Modificar el usuario con los nuevos datos
                 Venta ventaModificada = new Venta(idVenta, comentarios, idUsuario);
 
-                // Guardar el usuario modificado en la base de datos
                 try
                 {
-                    VentaData dataAccess = new VentaData();
-                    dataAccess.EliminarVenta(ventaModificada);
+                    VentaData.EliminarVenta(ventaModificada.Id);
                     MessageBox.Show("Venta eliminada con éxito");
                 }
                 catch (Exception ex)
@@ -92,22 +87,17 @@ namespace Pre_Entrega_Proyecto_final
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                // Obtener la fila seleccionada
                 DataGridViewRow filaSeleccionada = dataGridView1.SelectedRows[0];
 
-                // Obtener los valores de las celdas en la fila seleccionada
                 int idVenta = Convert.ToInt32(filaSeleccionada.Cells["Id"].Value);
                 string comentarios = Convert.ToString(filaSeleccionada.Cells["Comentarios"].Value);
                 int idUsuario = Convert.ToInt32(filaSeleccionada.Cells["IdUsuario"].Value);
 
-                // Modificar el usuario con los nuevos datos
                 Venta ventaModificada = new Venta(idVenta, comentarios, idUsuario);
 
-                // Guardar el usuario modificado en la base de datos
                 try
                 {
-                    VentaData dataAccess = new VentaData();
-                    dataAccess.ModificarVenta(ventaModificada);
+                    VentaData.ModificarVenta(ventaModificada);
                     MessageBox.Show("Venta modificada con éxito");
                 }
                 catch (Exception ex)

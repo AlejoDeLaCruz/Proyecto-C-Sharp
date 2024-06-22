@@ -111,8 +111,8 @@ namespace WebApplication1.Controllers
             }
         }
 
-        [HttpDelete("DeleteVenta", Name = "DeleteVenta")]
-        public ActionResult<string> Delete([FromBody] int id)
+        [HttpDelete("DeleteVenta/{id}", Name = "DeleteVenta")]
+        public ActionResult<string> Delete(int id)
         {
             if (id <= 0)
             {
