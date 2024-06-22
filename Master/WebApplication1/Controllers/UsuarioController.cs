@@ -9,10 +9,17 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
+
         [HttpGet("GetUsuarios", Name = "GetUsuarios")]
         public IEnumerable<Usuario> GetUsuarios()
         {
             return UsuarioBussiness.GetUsuarios();
+        }
+
+        [HttpGet("GetUsuariosPorId", Name = "GetUsuariosPorId")]
+        public IEnumerable<Usuario> GetUsuariosPorId(int id)
+        {
+            return UsuarioBussiness.GetUsuariosPorId(id);
         }
 
         [HttpPost("AddUsuario", Name = "AddUsuario")]

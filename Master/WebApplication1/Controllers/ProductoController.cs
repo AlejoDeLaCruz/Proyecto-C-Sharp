@@ -15,6 +15,12 @@ namespace WebApplication1.Controllers
             return ProductoBussiness.GetProductos();
         }
 
+        [HttpGet("GetProductosPorId", Name = "GetProductosPorId")]
+        public IEnumerable<Producto> ObtenerProductoPorId(int id)
+        {
+            return ProductoBussiness.ObtenerProductoPorId(id);
+        }
+
         [HttpPost("AddProducto", Name = "AddProducto")]
         public ActionResult<string> Post([FromBody] Producto producto)
         {

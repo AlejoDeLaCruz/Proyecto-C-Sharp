@@ -12,10 +12,48 @@ namespace WebApplication1.Controllers
     public class VentaController : ControllerBase
     {
 
+        //HACER PUT DELETE GET BY ID
+
         [HttpGet("GetVentas", Name = "GetVentas")]
         public IEnumerable<Venta> Ventas()
         {
             return VentaBussiness.GetVentas();
+        }
+
+        [HttpGet("GetVentasPorId", Name = "GetVentasPorId")]
+        public IEnumerable<Venta> VentasPorId(int id)
+        {
+            return VentaBussiness.GetVentasPorId(id);
+        }
+
+        [HttpDelete("DeleteVenta", Name = "DeleteVenta")]
+        public ActionResult<string> Delete([FromBody] int id)
+        {
+            bool status = VentaBussiness.DeleteVenta(id);
+
+            if (!status)
+            {
+                return BadRequest("No se pudo eliminar la venta");
+            }
+            else
+            {
+                return "Se pudo eliminar la venta exitosamente";
+            }
+        }
+
+        [HttpPut("ModificarVenta", Name = "ModificarVenta")]
+        public ActionResult<string> Put([FromBody] Venta venta)
+        {
+            bool status = VentaBussiness.ModificarVenta(venta);
+
+            if (!status)
+            {
+                return BadRequest("No se pudo modificar la venta");
+            }
+            else
+            {
+                return "Se pudo modificar la venta exitosamente";
+            }
         }
 
         [HttpPost("CargarVenta", Name = "CargarVenta")]

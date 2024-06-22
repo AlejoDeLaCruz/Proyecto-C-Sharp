@@ -12,6 +12,11 @@ namespace SistemaGestionBussiness
             return VentaData.GetVentas();
         }
 
+        public static List<Venta> GetVentasPorId(int id)
+        {
+            return VentaData.ObtenerVentaPorId(id);
+        }
+
         public static bool CrearVenta(Venta venta, List<ProductoVendido> productos, int idUsuario)
         {
             if (idUsuario <= 0 || !UsuarioData.UsuarioExiste(idUsuario))
@@ -40,6 +45,16 @@ namespace SistemaGestionBussiness
             }
 
             return VentaData.CrearVenta(venta, productos, idUsuario);
+        }
+
+        public static bool DeleteVenta(int id)
+        { 
+            return VentaData.EliminarVenta(id);
+        }
+
+        public static bool ModificarVenta(Venta venta)
+        {
+            return VentaData.ModificarVenta(venta);
         }
     }
 }

@@ -152,7 +152,7 @@ namespace SistemaGestionData
         }
 
     //METODO MODIFICAR VENTA
-    public void ModificarVenta(Venta venta)
+    public static bool ModificarVenta(Venta venta)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
@@ -170,27 +170,47 @@ namespace SistemaGestionData
                     comando.Parameters.Add(new SqlParameter("Comentarios", SqlDbType.VarChar) { Value = venta.Comentarios });
                     comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = venta.IdUsuario });
 
-                    comando.ExecuteNonQuery();
+                    return comando.ExecuteNonQuery() > 0;
                 }
             }
         }
 
 
         //METODO ELIMINAR VENTA
-
-        public void EliminarVenta(Venta venta)
+        public static bool EliminarVenta(int id)
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
-
-            var query = "DELETE FROM Venta WHERE Id = @Id";
 
             using (SqlConnection conexion = new SqlConnection(connectionString))
             {
                 conexion.Open();
-                using (SqlCommand comando = new SqlCommand(query, conexion))
+                using (SqlTransaction transaction = conexion.BeginTransaction())
                 {
-                    comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = venta.Id });
-                    comando.ExecuteNonQuery();
+                    try
+                    {
+                        // Primero eliminar los productos vendidos relacionados
+                        var queryEliminarProductosVendidos = "DELETE FROM ProductoVendido WHERE IdVenta = @IdVenta";
+                        using (SqlCommand comandoEliminarProductosVendidos = new SqlCommand(queryEliminarProductosVendidos, conexion, transaction))
+                        {
+                            comandoEliminarProductosVendidos.Parameters.Add(new SqlParameter("IdVenta", SqlDbType.Int) { Value = id });
+                            comandoEliminarProductosVendidos.ExecuteNonQuery();
+                        }
+
+                        // Luego eliminar la venta
+                        var queryEliminarVenta = "DELETE FROM Venta WHERE Id = @Id";
+                        using (SqlCommand comandoEliminarVenta = new SqlCommand(queryEliminarVenta, conexion, transaction))
+                        {
+                            comandoEliminarVenta.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = id });
+                            return comandoEliminarVenta.ExecuteNonQuery() > 0;
+                        }
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw new Exception("Error al eliminar Venta", ex);
+                    }
                 }
             }
         }

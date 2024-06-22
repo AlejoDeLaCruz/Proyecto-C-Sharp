@@ -95,9 +95,8 @@ namespace Pre_Entrega_Proyecto_final.FormulariosDeCreacion
             }
 
             Producto nuevoProducto = new Producto(0, descripcion, precio, costo, stock, usuario);
-            ProductoData dataAccess = new ProductoData();
 
-            dataAccess.CrearProducto(nuevoProducto);
+            ProductoData.CrearProducto(nuevoProducto);
             MessageBox.Show("Producto creado con éxito");
 
 

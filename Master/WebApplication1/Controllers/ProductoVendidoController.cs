@@ -15,5 +15,56 @@ namespace WebApplication1.Controllers
         {
             return ProductoVendidoBussiness.GetProductosVendidos();
         }
+
+        [HttpDelete ("DeleteProductosVentidos", Name = "DeleteProductosVendidos")]
+        public ActionResult<string> Delete([FromBody] int id)
+        {
+            bool status = ProductoVendidoBussiness.EliminarProductoVendido(id);
+            if (!status)
+            {
+                return BadRequest("No se pudo eliminar el producto vendido");
+            }
+            else
+            {
+                return "producto vendido eliminado exitosamente";
+            }
+        }
+
+        [HttpGet("GetProductosVendidosPorId", Name = "GetProductosVendidosPorId")]
+
+        public IEnumerable<ProductoVendido> ProductosVendidosPorId(int id)
+        {
+            return ProductoVendidoBussiness.ObtenerProductoVendidoPorId(id);
+        }
+
+        [HttpPost("CreateProductoVendido", Name = "CreateProductoVendido")]
+
+        public ActionResult<string> Post([FromBody] ProductoVendido productoVendido)
+        {
+            bool status = ProductoVendidoBussiness.CrearProductoVendido(productoVendido);
+            if (!status)
+            {
+                return BadRequest("No se pudo crear el producto vendido");
+            }
+            else
+            {
+                return "producto vendido creado exitosamente";
+            }
+        }
+
+        [HttpPut("ModifyProductoVendido", Name = "ModifyProductoVendido")]
+
+        public ActionResult<string> Put([FromBody] ProductoVendido productoVendido)
+        {
+            bool status = ProductoVendidoBussiness.ModificarProductoVendido(productoVendido);
+            if (!status)
+            {
+                return BadRequest("No se pudo modificar el producto vendido");
+            }
+            else
+            {
+                return "producto vendido modificado exitosamente";
+            }
+        }
     }
 }

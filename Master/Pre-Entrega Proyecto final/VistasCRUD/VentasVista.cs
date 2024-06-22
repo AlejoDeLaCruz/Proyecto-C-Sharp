@@ -121,5 +121,10 @@ namespace Pre_Entrega_Proyecto_final
             }
             CargarVentas();
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

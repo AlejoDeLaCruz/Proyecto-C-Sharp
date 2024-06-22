@@ -85,6 +85,7 @@
             label1.Size = new Size(253, 42);
             label1.TabIndex = 4;
             label1.Text = "¿Qué querés ver?";
+            label1.Click += label1_Click;
             // 
             // ElegirInformacion
             // 

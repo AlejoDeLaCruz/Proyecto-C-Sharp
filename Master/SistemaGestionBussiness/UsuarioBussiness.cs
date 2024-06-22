@@ -14,6 +14,10 @@ namespace SistemaGestionBussiness
         {
             return UsuarioData.GetUsuarios();
         }
+        public static List<Usuario> GetUsuariosPorId(int id)
+        {
+            return UsuarioData.ObtenerUsuarioPorId(id);
+        }
         public static bool ModificarUsuario(Usuario usuario)
         {
             if (!UsuarioData.UsuarioExiste(usuario.Id))

@@ -42,8 +42,7 @@ namespace Pre_Entrega_Proyecto_final
             Usuario nuevoUsuario = new Usuario(0, nombre, apellido, nombreDeUsuario, email, contrasena);
 
             // Guardar el usuario en la base de datos
-            UsuarioData dataAccess = new UsuarioData();
-            dataAccess.CrearUsuario(nuevoUsuario);
+            UsuarioData.CrearUsuario(nuevoUsuario);
 
             MessageBox.Show("Usuario y contraseña guardados con éxito");
 

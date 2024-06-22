@@ -70,8 +70,7 @@ namespace Pre_Entrega_Proyecto_final
                 // Guardar el usuario modificado en la base de datos
                 try
                 {
-                    UsuarioData dataAccess = new UsuarioData();
-                    dataAccess.ModificarUsuario(usuarioModificado);
+                    UsuarioData.ModificarUsuario(usuarioModificado);
                     MessageBox.Show("Usuario modificado con éxito");
                 }
                 catch (Exception ex)
@@ -103,8 +102,7 @@ namespace Pre_Entrega_Proyecto_final
 
                 try
                 {
-                    UsuarioData dataAccess = new UsuarioData();
-                    dataAccess.EliminarUsuario(usuarioABorrar);
+                    UsuarioData.EliminarUsuario(usuarioABorrar.Id);
                     MessageBox.Show("Usuario eliminado con éxito");
                 }
                 catch (Exception ex)

@@ -44,8 +44,7 @@ namespace Pre_Entrega_Proyecto_final
                 // Guardar el usuario modificado en la base de datos
                 try
                 {
-                    ProductoData dataAccess = new ProductoData();
-                    dataAccess.ModificarProducto(productoModificado);
+                    ProductoData.ModificarProducto(productoModificado);
                     MessageBox.Show("producto modificado con éxito");
                 }
                 catch (Exception ex)
@@ -102,8 +101,7 @@ namespace Pre_Entrega_Proyecto_final
                 // Guardar el usuario modificado en la base de datos
                 try
                 {
-                    ProductoData dataAccess = new ProductoData();
-                    dataAccess.EliminarProducto(productoEliminado);
+                    ProductoData.EliminarProducto(productoEliminado.Id);
                     MessageBox.Show("producto eliminado con éxito");
                 }
                 catch (Exception ex)

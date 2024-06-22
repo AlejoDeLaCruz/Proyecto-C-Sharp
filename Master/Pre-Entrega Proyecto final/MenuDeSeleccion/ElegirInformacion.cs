@@ -56,5 +56,10 @@ namespace Pre_Entrega_Proyecto_final
 
             this.Hide();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
