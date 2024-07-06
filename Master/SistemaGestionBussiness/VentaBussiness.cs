@@ -1,5 +1,5 @@
 ﻿using SistemaGestionData;
-using SistemaGestionEntities;
+using SistemaGestionEntities.Entidades;
 using System;
 using System.Collections.Generic;
 

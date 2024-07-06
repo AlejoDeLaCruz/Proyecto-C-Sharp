@@ -33,6 +33,8 @@
             button3 = new Button();
             button4 = new Button();
             dataGridView1 = new DataGridView();
+            label1 = new Label();
+            textBox1 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -87,12 +89,32 @@
             dataGridView1.TabIndex = 4;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(192, 29);
+            label1.Name = "label1";
+            label1.Size = new Size(99, 20);
+            label1.TabIndex = 5;
+            label1.Text = "Buscar por Id:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(297, 26);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(116, 26);
+            textBox1.TabIndex = 6;
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
             // VentasVista
             // 
             AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlText;
             ClientSize = new Size(800, 450);
+            Controls.Add(textBox1);
+            Controls.Add(label1);
             Controls.Add(dataGridView1);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -103,6 +125,7 @@
             Load += VentasVista_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -112,5 +135,7 @@
         private Button button3;
         private Button button4;
         private DataGridView dataGridView1;
+        private Label label1;
+        private TextBox textBox1;
     }
 }

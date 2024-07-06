@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-using SistemaGestionEntities;
 using System.Collections;
+using SistemaGestionEntities.Entidades;
 
 namespace SistemaGestionData
 {
     public class VentaData
     {
-        // METODO OBTENER VENTA
+        // METODO OBTENER VENTA POR ID
         public static List<Venta> ObtenerVentaPorId(int idVenta)
         {
             List<Venta> lista = new List<Venta>();

@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-using SistemaGestionEntities;
+using SistemaGestionEntities.Entidades;
 
 namespace SistemaGestionData
 {
     public class ProductoVendidoData
     {
-        // METODO OBTENER PRODUCTO VENDIDO
+        // METODO OBTENER PRODUCTO VENDIDO POR ID
         public static List<ProductoVendido> ObtenerProductoVendidoPorId(int idProductoVendido)
         {
             List<ProductoVendido> lista = new List<ProductoVendido>();

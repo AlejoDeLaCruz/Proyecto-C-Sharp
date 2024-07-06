@@ -23,7 +23,6 @@ namespace Pre_Entrega_Proyecto_final
 
         private void productosVendidosClick(object sender, EventArgs e)
         {
-            //Pasar a la pagina de informacion
             ProductoVendidoVista productoVendido = new ProductoVendidoVista();
             productoVendido.Show();
 
@@ -32,7 +31,6 @@ namespace Pre_Entrega_Proyecto_final
 
         private void usuariosClick(object sender, EventArgs e)
         {
-            //Pasar a la pagina de informacion
             UsuariosVista usuariosVista = new UsuariosVista();
             usuariosVista.Show();
 
@@ -41,7 +39,6 @@ namespace Pre_Entrega_Proyecto_final
 
         private void ventasClick(object sender, EventArgs e)
         {
-            //Pasar a la pagina de informacion
             VentasVista venta = new VentasVista();
             venta.Show();
 
@@ -50,7 +47,6 @@ namespace Pre_Entrega_Proyecto_final
 
         private void productosClick(object sender, EventArgs e)
         {
-            //Pasar a la pagina de informacion
             ProductoVista producto = new ProductoVista();
             producto.Show();
 

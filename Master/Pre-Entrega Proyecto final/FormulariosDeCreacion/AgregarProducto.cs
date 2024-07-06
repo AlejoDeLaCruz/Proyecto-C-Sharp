@@ -1,22 +1,21 @@
-﻿using SistemaGestionData;
-using SistemaGestionEntities;
+﻿using Newtonsoft.Json;
+using Pre_Entrega_Proyecto_final.ApiServices;
+using SistemaGestionEntities.Entidades;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Pre_Entrega_Proyecto_final.FormulariosDeCreacion
 {
     public partial class AgregarProducto : Form
     {
+        private ApiService apiService;
+
         public AgregarProducto()
         {
             InitializeComponent();
+            apiService = new ApiService();
         }
 
         private void AgregarProducto_Load(object sender, EventArgs e)
@@ -64,7 +63,7 @@ namespace Pre_Entrega_Proyecto_final.FormulariosDeCreacion
 
         }
 
-        private void BotonCrear_Click(object sender, EventArgs e)
+        private async void BotonCrear_Click(object sender, EventArgs e)
         {
             string descripcion = DescripcionTxt.Text;
             double precio;
@@ -90,18 +89,38 @@ namespace Pre_Entrega_Proyecto_final.FormulariosDeCreacion
             }
             if (!int.TryParse(UsuarioTxt.Text, out usuario))
             {
-                MessageBox.Show("El valor ingresado para el stock no es válido.");
+                MessageBox.Show("El valor ingresado para el usuario no es válido.");
                 return;
             }
 
             Producto nuevoProducto = new Producto(0, descripcion, precio, costo, stock, usuario);
 
-            ProductoData.CrearProducto(nuevoProducto);
-            MessageBox.Show("Producto creado con éxito");
+            try
+            {
+                string json = JsonConvert.SerializeObject(nuevoProducto, Formatting.Indented);
+                HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
+                Console.WriteLine("JSON Payload: " + json);
 
-            ProductoVista agregarProducto = new ProductoVista();
-            agregarProducto.Show();
+                var response = await apiService.PostDataAsync("api/Producto/AddProducto", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Producto creado con éxito");
+                }
+                else
+                {
+                    string errorMessage = await response.Content.ReadAsStringAsync();
+                    MessageBox.Show("Error al crear producto: " + errorMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al crear producto: " + ex.Message);
+            }
+
+            ProductoVista productoVista = new ProductoVista();
+            productoVista.Show();
             this.Hide();
         }
     }

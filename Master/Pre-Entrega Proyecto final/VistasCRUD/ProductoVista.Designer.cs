@@ -33,6 +33,8 @@
             EliminarProducto = new Button();
             VolverButton = new Button();
             dataGridView1 = new DataGridView();
+            textBox1 = new TextBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -86,12 +88,33 @@
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(319, 35);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(116, 26);
+            textBox1.TabIndex = 4;
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(152, 38);
+            label1.Name = "label1";
+            label1.Size = new Size(161, 20);
+            label1.TabIndex = 5;
+            label1.Text = "Buscar producto por id";
+            label1.Click += label1_Click;
+            // 
             // ProductoVista
             // 
             AutoScaleDimensions = new SizeF(8F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlText;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
+            Controls.Add(textBox1);
             Controls.Add(dataGridView1);
             Controls.Add(VolverButton);
             Controls.Add(EliminarProducto);
@@ -102,6 +125,7 @@
             Load += ProductoVista_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -111,5 +135,7 @@
         private Button EliminarProducto;
         private Button VolverButton;
         private DataGridView dataGridView1;
+        private TextBox textBox1;
+        private Label label1;
     }
 }

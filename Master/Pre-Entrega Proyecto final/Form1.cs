@@ -1,5 +1,7 @@
-using SistemaGestionData;
-using SistemaGestionEntities;
+using SistemaGestionData; 
+using SistemaGestionEntities.Entidades;
+using System;
+using System.Windows.Forms;
 
 namespace Pre_Entrega_Proyecto_final
 {
@@ -38,20 +40,28 @@ namespace Pre_Entrega_Proyecto_final
             string email = emailPersona.Text;
             string contrasena = contraseniaPersona.Text;
 
-            // Crear un nuevo usuario con los datos ingresados
             Usuario nuevoUsuario = new Usuario(0, nombre, apellido, nombreDeUsuario, email, contrasena);
 
-            // Guardar el usuario en la base de datos
-            UsuarioData.CrearUsuario(nuevoUsuario);
+            try
+            {
+                bool resultado = UsuarioData.CrearUsuario(nuevoUsuario);
 
-            MessageBox.Show("Usuario y contraseña guardados con éxito");
-
-            //Pasar a la pagina de informacion
+                if (resultado)
+                {
+                    MessageBox.Show("Usuario creado con éxito");
+                }
+                else
+                {
+                    MessageBox.Show("No se pudo crear el usuario. Verifica los datos ingresados.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al crear usuario: {ex.Message}");
+            }
             ElegirInformacion elegirInformacionForm = new ElegirInformacion();
             elegirInformacionForm.Show();
-
-            // Cerrar el formulario actual (opcional)
-            this.Hide(); // O puedes usar this.Close() si quieres cerrar completamente el formulario actual
+            this.Hide();
         }
     }
 }

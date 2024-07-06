@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using SistemaGestionEntities;
 using System.Data;
+using SistemaGestionEntities.Entidades;
 
 namespace SistemaGestionData
 {
     public class ProductoData
     {
-        // METODO OBTENER PRODUCTOS
+        // METODO OBTENER PRODUCTOS POR ID
         public static List<Producto> ObtenerProductoPorId(int idProducto)
         {
             List<Producto> lista = new List<Producto>();
@@ -149,15 +149,22 @@ namespace SistemaGestionData
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
-            var query = "DELETE FROM Producto WHERE Id = @Id";
-
             using (SqlConnection conexion = new SqlConnection(connectionString))
             {
                 conexion.Open();
-                using (SqlCommand comando = new SqlCommand(query, conexion))
+
+                var queryEliminarDependientes = "DELETE FROM ProductoVendido WHERE IdProducto = @IdProducto";
+                using (SqlCommand comandoEliminarDependientes = new SqlCommand(queryEliminarDependientes, conexion))
                 {
-                    comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = id });
-                    return comando.ExecuteNonQuery() > 0;
+                    comandoEliminarDependientes.Parameters.Add(new SqlParameter("IdProducto", SqlDbType.Int) { Value = id });
+                    comandoEliminarDependientes.ExecuteNonQuery();
+                }
+
+                var queryEliminarProducto = "DELETE FROM Producto WHERE Id = @Id";
+                using (SqlCommand comandoEliminarProducto = new SqlCommand(queryEliminarProducto, conexion))
+                {
+                    comandoEliminarProducto.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = id });
+                    return comandoEliminarProducto.ExecuteNonQuery() > 0;
                 }
             }
         }

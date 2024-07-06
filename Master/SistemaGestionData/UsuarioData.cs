@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-using SistemaGestionEntities;
+using SistemaGestionEntities.Entidades;
 
 namespace SistemaGestionData
 {
     public class UsuarioData
     {
-        // METODO OBTENER USUARIO
+        // METODO OBTENER USUARIO POR ID
         public static List<Usuario> ObtenerUsuarioPorId(int idUsuario)
         {
             List<Usuario> lista = new List<Usuario>();
@@ -149,15 +149,59 @@ namespace SistemaGestionData
         {
             string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
 
-            var query = "DELETE FROM Usuario WHERE Id = @Id";
+            try
+            {
+                EliminarProductosPorUsuario(id);
+
+                EliminarVentasPorUsuario(id);
+
+                string query = "DELETE FROM Usuario WHERE Id = @Id";
+
+                using (SqlConnection conexion = new SqlConnection(connectionString))
+                {
+                    conexion.Open();
+                    using (SqlCommand comando = new SqlCommand(query, conexion))
+                    {
+                        comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = id });
+                        return comando.ExecuteNonQuery() > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al eliminar usuario: " + ex.Message);
+                return false;
+            }
+        }
+
+        private static void EliminarProductosPorUsuario(int idUsuario)
+        {
+            string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
+            string query = "DELETE FROM Producto WHERE IdUsuario = @IdUsuario";
 
             using (SqlConnection conexion = new SqlConnection(connectionString))
             {
                 conexion.Open();
                 using (SqlCommand comando = new SqlCommand(query, conexion))
                 {
-                    comando.Parameters.Add(new SqlParameter("Id", SqlDbType.Int) { Value = id });
-                    return comando.ExecuteNonQuery() > 0;
+                    comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = idUsuario });
+                    comando.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private static void EliminarVentasPorUsuario(int idUsuario)
+        {
+            string connectionString = @"Server=localhost\SQLEXPRESS;Database=ProyectoCSharp;Trusted_connection=True;";
+            string query = "DELETE FROM Venta WHERE IdUsuario = @IdUsuario";
+
+            using (SqlConnection conexion = new SqlConnection(connectionString))
+            {
+                conexion.Open();
+                using (SqlCommand comando = new SqlCommand(query, conexion))
+                {
+                    comando.Parameters.Add(new SqlParameter("IdUsuario", SqlDbType.Int) { Value = idUsuario });
+                    comando.ExecuteNonQuery();
                 }
             }
         }
