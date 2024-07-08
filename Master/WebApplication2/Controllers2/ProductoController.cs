@@ -37,7 +37,7 @@ namespace WebApplication2.Controllers2
         [HttpPost("AddProducto")]
         public IActionResult CrearProducto([FromBody] Producto producto)
         {
-            if (producto == null || string.IsNullOrEmpty(producto.Descripciones) || producto.PrecioVenta < 0 || producto.Costo < 0 || producto.Stock < 0 || producto.IdUsuario <= 0)
+            if (producto == null || string.IsNullOrEmpty(producto.Descripciones) || producto.PrecioVenta < 0 || producto.Costo < 0 || producto.Stock <= 0 || producto.IdUsuario <= 0)
             {
                 return BadRequest("Datos del producto inválidos.");
             }

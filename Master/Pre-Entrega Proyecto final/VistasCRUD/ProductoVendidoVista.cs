@@ -61,27 +61,35 @@ namespace Pre_Entrega_Proyecto_final
 
                 ProductoVendido producto = new ProductoVendido(idProductoVendido, idProducto, nuevoStock, idVenta);
 
-                try
+                if (nuevoStock > 0)
                 {
-                    var json = JsonConvert.SerializeObject(producto);
-                    var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                    var endpoint = $"api/ProductoVendido/ModifyProductoVendido";
-                    var response = await _apiService.PutDataAsync(endpoint, content);
-
-                    if (response.IsSuccessStatusCode)
+                    try
                     {
-                        MessageBox.Show("Producto vendido modificado exitosamente");
-                        await CargarProductosVendidos();
+                        var json = JsonConvert.SerializeObject(producto);
+                        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                        var endpoint = $"api/ProductoVendido/ModifyProductoVendido";
+                        var response = await _apiService.PutDataAsync(endpoint, content);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Producto vendido modificado exitosamente");
+                            await CargarProductosVendidos();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error al modificar el producto vendido: " + response.ReasonPhrase);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Error al modificar el producto vendido: " + response.ReasonPhrase);
+                        MessageBox.Show("Error al modificar el producto vendido: " + ex.Message);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Error al modificar el producto vendido: " + ex.Message);
+                    MessageBox.Show("Stock no puede ser 0 o negativo.");
+                    await CargarProductosVendidos();
                 }
             }
             else

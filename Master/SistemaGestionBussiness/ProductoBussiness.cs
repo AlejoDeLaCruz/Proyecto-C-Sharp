@@ -37,6 +37,10 @@ namespace SistemaGestionBussiness
             {
                 return false;
             }
+            if (producto.Stock <= 0)
+            {
+                return false;
+            }
             return ProductoData.ModificarProducto(producto);
         }
     }

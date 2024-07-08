@@ -39,21 +39,51 @@ namespace Pre_Entrega_Proyecto_final.FormulariosDeCreacion
             int stock;
             int idVenta;
 
-            if (!int.TryParse(idProductoTxt.Text, out idProducto))
+            if (!int.TryParse(idProductoTxt.Text, out idProducto) || idProducto <= 0)
             {
                 MessageBox.Show("El valor ingresado para el id de producto no es válido.");
                 return;
             }
 
-            if (!int.TryParse(StockTxt.Text, out stock))
+            if (!int.TryParse(StockTxt.Text, out stock) || stock <= 0)
             {
                 MessageBox.Show("El valor ingresado para el stock no es válido.");
                 return;
             }
 
-            if (!int.TryParse(IdDeVentaTxt.Text, out idVenta))
+            if (!int.TryParse(IdDeVentaTxt.Text, out idVenta) || idVenta <= 0)
             {
                 MessageBox.Show("El valor ingresado para el id de venta no es válido.");
+                return;
+            }
+            try
+            {
+                string resultProducto = await _apiService.GetDataAsync($"api/Producto/GetProductosPorId/{idProducto}");
+                var productos = JsonConvert.DeserializeObject<List<Producto>>(resultProducto);
+                if (productos == null || productos.Count == 0)
+                {
+                    MessageBox.Show($"El producto con ID {idProducto} no existe.");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al verificar el producto: {ex.Message}");
+                return;
+            }
+            try
+            {
+                string resultVenta = await _apiService.GetDataAsync($"api/Venta/GetVentasPorId?id={idVenta}");
+                var ventas = JsonConvert.DeserializeObject<List<Venta>>(resultVenta);
+                if (ventas == null || ventas.Count == 0)
+                {
+                    MessageBox.Show($"La venta con ID {idVenta} no existe.");
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al verificar la venta: {ex.Message}");
                 return;
             }
 

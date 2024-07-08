@@ -99,36 +99,38 @@ namespace Pre_Entrega_Proyecto_final.FormulariosDeCreacion
                 MessageBox.Show("El valor ingresado para la cantidad de productos no es válido.");
                 return;
             }
+
             try
             {
                 string result = await apiService.GetDataAsync($"api/Producto/GetProductosPorId/{productId}");
-
-                if (string.IsNullOrEmpty(result))
+                var productos = JsonConvert.DeserializeObject<List<Producto>>(result);
+                if (productos == null || productos.Count == 0)
                 {
                     MessageBox.Show($"El producto con ID {productId} no existe.");
                 }
                 else
                 {
-                    ProductoVendido productoVendido = new ProductoVendido
+                    Producto producto = productos.FirstOrDefault(p => p.Id == productId);
+                    if (producto == null)
                     {
-                        IdProducto = productId,
-                        Stock = cantidad
-                    };
+                        MessageBox.Show($"El producto con ID {productId} no existe.");
+                    }
+                    else
+                    {
+                        ProductoVendido productoVendido = new ProductoVendido
+                        {
+                            IdProducto = productId,
+                            Stock = cantidad
+                        };
 
-                    productosVendidos.Add(productoVendido);
-                    MessageBox.Show($"Producto {productId} con cantidad {cantidad} agregado.");
+                        productosVendidos.Add(productoVendido);
+                        MessageBox.Show($"Producto {productId} con cantidad {cantidad} agregado.");
+                    }
                 }
             }
             catch (Exception ex)
             {
-                if (ex is HttpRequestException && ((HttpRequestException)ex).StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    MessageBox.Show($"El producto con ID {productId} no existe.");
-                }
-                else
-                {
-                    MessageBox.Show($"Error al verificar el producto: {ex.Message}");
-                }
+                MessageBox.Show($"Error al verificar el producto: {ex.Message}");
             }
         }
 

@@ -56,18 +56,26 @@ namespace Pre_Entrega_Proyecto_final
 
                 Producto productoModificado = new Producto(idProducto, nuevasDescripciones, nuevoPrecioVenta, nuevoCosto, nuevoStock, idUsuario);
 
-                try
+                if (nuevoStock > 0 && nuevoPrecioVenta >= 0 && nuevoCosto >= 0)
                 {
-                    string json = JsonConvert.SerializeObject(productoModificado);
-                    HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                    try
+                    {
+                        string json = JsonConvert.SerializeObject(productoModificado);
+                        HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                    await apiService.PutDataAsync($"api/Producto/ModifyProducto", content);
-                    MessageBox.Show("Producto modificado con éxito");
+                        await apiService.PutDataAsync($"api/Producto/ModifyProducto", content);
+                        MessageBox.Show("Producto modificado con éxito");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al modificar producto: " + ex.Message);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show("Error al modificar producto: " + ex.Message);
+                    MessageBox.Show("Los campos precioVenta y costo no pueden ser negativos. Stock no puede ser 0.");
                 }
+
             }
             else
             {
